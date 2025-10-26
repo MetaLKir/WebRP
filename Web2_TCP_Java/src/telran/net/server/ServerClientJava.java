@@ -11,8 +11,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class ServerClientJava implements Runnable {
-    private ObjectOutputStream output;
-    private ObjectInputStream input;
+//    private ObjectOutputStream output;
+//    private ObjectInputStream input;
     private Socket socket;
     private ProtocolJava protocol;
 
@@ -24,8 +24,8 @@ public class ServerClientJava implements Runnable {
     @Override
     public void run() {
         try (Socket s = this.socket;
-             ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-             ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
+             ObjectOutputStream output = new ObjectOutputStream(s.getOutputStream());
+             ObjectInputStream input = new ObjectInputStream(s.getInputStream());
         ) {
             output.flush();
             while (true) {
