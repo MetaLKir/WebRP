@@ -9,14 +9,17 @@ import java.io.EOFException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ServerClientJava implements Runnable {
-//    private ObjectOutputStream output;
+    //    private ObjectOutputStream output;
 //    private ObjectInputStream input;
     private Socket socket;
     private ProtocolJava protocol;
+    static AtomicBoolean shutdown = new AtomicBoolean(false);
 
-    public ServerClientJava(Socket socket, ProtocolJava protocol) throws Exception {
+    public ServerClientJava(Socket socket, ProtocolJava protocol) {
         this.socket = socket;
         this.protocol = protocol;
     }
@@ -28,22 +31,27 @@ public class ServerClientJava implements Runnable {
              ObjectInputStream input = new ObjectInputStream(s.getInputStream());
         ) {
             output.flush();
-            while (true) {
-                Object obj = input.readObject();
-                ResponseJava response;
-                if (!(obj instanceof RequestJava request)) {
-                    response = new ResponseJava(TCPResponseCode.WRONG_REQUEST, null);
-                } else {
-                    try {
-                        response = protocol.getResponse(request);
-                        if (response == null)
-                            response = new ResponseJava(TCPResponseCode.UNKNOWN, null);
-                    } catch (Exception e) {
+            while (!shutdown.get()) {
+                try {
+                    Object obj = input.readObject();
+                    ResponseJava response;
+                    if (!(obj instanceof RequestJava request)) {
                         response = new ResponseJava(TCPResponseCode.WRONG_REQUEST, null);
+                    } else {
+                        try {
+                            response = protocol.getResponse(request);
+                            if (response == null)
+                                response = new ResponseJava(TCPResponseCode.UNKNOWN, null);
+                        } catch (Exception e) {
+                            response = new ResponseJava(TCPResponseCode.WRONG_REQUEST, null);
+                        }
                     }
+                    output.writeObject(response);
+                    output.flush();
+                    output.reset();
+                } catch (SocketTimeoutException e) {
+
                 }
-                output.writeObject(response);
-                output.flush();
             }
         } catch (EOFException e) {
             System.out.println("client closed connection");

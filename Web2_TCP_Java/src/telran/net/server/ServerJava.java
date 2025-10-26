@@ -5,16 +5,24 @@ import telran.net.protocol.ProtocolJava;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ServerJava implements Runnable {
     ServerSocket serverSocket;
     ProtocolJava protocol;
     int port;
+    int timeout;
+    ExecutorService executor; // for threads pool
 
-    public ServerJava(ProtocolJava protocol, int port) throws IOException {
+    public ServerJava(ProtocolJava protocol, int port, int timeout, int nThreads) throws IOException {
         this.protocol = protocol;
         this.port = port;
+        this.timeout = timeout;
         serverSocket = new ServerSocket(port);
+        this.serverSocket.setSoTimeout(timeout);
+        this.executor = Executors.newFixedThreadPool(nThreads);
     }
 
     @Override
@@ -22,25 +30,43 @@ public class ServerJava implements Runnable {
         System.out.println("listen on port " + port);
 
         try {
-            while (!serverSocket.isClosed()) {
+            while (!ServerClientJava.shutdown.get()) {
                 try {
                     Socket socket = serverSocket.accept();
-                    new ServerClientJava(socket, protocol).run();
-                } catch (Exception clientError) {
-                    System.out.println("Client error " + clientError.getMessage());
+                    socket.setSoTimeout(timeout);
+                    executor.execute(new ServerClientJava(socket, protocol));
+                } catch (SocketTimeoutException e) {
+
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             if (!serverSocket.isClosed()) {
                 System.out.println("server error " + e.getMessage());
             }
+        } finally {
+            executor.shutdownNow();
+            try {
+                serverSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("server stopped");
         }
     }
 
-    public void stop() {
+//    public void stop() {
+//        try {
+//            serverSocket.close();
+//        } catch (Exception ignored) {
+//        }
+//    }
+
+    public void shutdown() {
+        ServerClientJava.shutdown.set(true);
         try {
             serverSocket.close();
-        } catch (Exception ignored) {
+        } catch (IOException e) {
         }
+        executor.shutdownNow();
     }
 }
