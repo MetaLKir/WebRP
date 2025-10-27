@@ -41,7 +41,7 @@ public class AddDriverItem extends RentCompanyItem {
 			return;
 		Driver driver = new Driver(licenseId, name, birthYear, phone);
 		inOut.outputLine(company.addDriver(driver));
-
+		
 	}
 
 }

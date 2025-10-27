@@ -9,13 +9,13 @@ import com.telran.cars.dto.enums.*;
 
 public interface IRentCompany extends Serializable {
 	// sprint 1
-	int getGasPrice();
-
-	void setGasPrice(int price);
-
-	int getFinePercent();
-
-	void setFinePercent(int finePercent);
+//	int getGasPrice();
+//
+//	void setGasPrice(int price);
+//
+//	int getFinePercent();
+//
+//	void setFinePercent(int finePercent);
 
 	CarsReturnCode addModel(Model model);
 
