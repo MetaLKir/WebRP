@@ -1,7 +1,6 @@
 package com.telran.cars.models;
 
-import com.telran.cars.dto.ReturnCarData;
-import com.telran.cars.dto.StatisticsData;
+import com.telran.cars.dto.*;
 import telran.net.protocol.ProtocolJava;
 import telran.net.protocol.RequestJava;
 import telran.net.protocol.ResponseJava;
@@ -10,8 +9,7 @@ import telran.net.protocol.TCPResponseCode;
 import java.io.Serializable;
 
 import static com.telran.cars.api.APIConstants.*;
-import static telran.net.protocol.TCPResponseCode.OK;
-import static telran.net.protocol.TCPResponseCode.WRONG_REQUEST;
+import static telran.net.protocol.TCPResponseCode.*;
 
 public class RentCompanyProtocol implements ProtocolJava {
     IRentCompany company;
@@ -71,7 +69,7 @@ public class RentCompanyProtocol implements ProtocolJava {
                 return new ResponseJava(TCPResponseCode.UNKNOWN,null);
         }
     }
-
+    // ===== UTILITY =====
     private ResponseJava wrongRequest(String message){
         return new ResponseJava(WRONG_REQUEST, message);
     }
@@ -81,12 +79,57 @@ public class RentCompanyProtocol implements ProtocolJava {
         return new ResponseJava(OK, null);
     }
 
-    private ResponseJava _records(Serializable data) {
+    // ===== CAR =====
+    private ResponseJava _car_add(Serializable data) {
         try {
-            StatisticsData statData = (StatisticsData) data;
-            Serializable responseData = (Serializable) company.getRentRecordsAtDate(
-                    statData.getFromDate(),
-                    statData.getToDate()
+            Serializable responseData = company.addCar((Car) data);
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _car(Serializable data) {
+        try {
+            Serializable responseData = company.getCar((String) data);
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _car_rent(Serializable data) {
+        try {
+            RentCarData rentCarData = (RentCarData) data;
+            Serializable responseData = company.rentCar(
+                    rentCarData.getRegNumber(),
+                    rentCarData.getLicenseId(),
+                    rentCarData.getRentDate(),
+                    rentCarData.getRentDays());
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _car_remove(Serializable data) {
+        try {
+            Serializable responseData = company.removeCar((String) data);
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _car_return(Serializable data) {
+        try {
+            ReturnCarData returnCarData = (ReturnCarData) data;
+            Serializable responseData = company.returnCar(
+                    returnCarData.getRegNumber(),
+                    returnCarData.getLicenceId(),
+                    returnCarData.getReturnDate(),
+                    returnCarData.getDamage(),
+                    returnCarData.getTankPercent()
             );
             return new ResponseJava(OK, responseData);
         } catch (Exception e) {
@@ -94,13 +137,92 @@ public class RentCompanyProtocol implements ProtocolJava {
         }
     }
 
-    private ResponseJava _models_profitable(Serializable data) {
+    // ===== DRIVER =====
+    private ResponseJava _driver_add(Serializable data) {
         try {
-            StatisticsData statData = (StatisticsData) data;
-            Serializable responseData = (Serializable) company.getMostProfitableCarModels(
-                    statData.getFromDate(),
-                    statData.getToDate()
-            );
+            Serializable responseData = company.addDriver((Driver) data);
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _driver(Serializable data) {
+        try {
+            Serializable responseData = company.getDriver((long) data);
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _driver_cars(Serializable data) {
+        try {
+            Serializable responseData = (Serializable) company.getCarsByDriver((long) data);
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _drivers_car(Serializable data) {
+        try {
+            Serializable responseData = (Serializable) company.getDriversByCar((String) data);
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _drivers_active(Serializable data) {
+        try {
+            Serializable responseData = (Serializable) company.getMostActiveDrivers();
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    // ===== MODEL =====
+    private ResponseJava _model_add(Serializable data) {
+        try {
+            Serializable responseData = company.addModel((Model) data);
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _model(Serializable data) {
+        try {
+            Serializable responseData = company.getModel((String) data);
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _model_remove(Serializable data) {
+        try {
+            Serializable responseData = (Serializable) company.removeModel((String) data);
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _model_cars(Serializable data) {
+        try {
+            Serializable responseData = (Serializable) company.getCarsByModel((String) data);
+            return new ResponseJava(OK, responseData);
+        } catch (Exception e) {
+            return wrongRequest(e.getMessage());
+        }
+    }
+
+    private ResponseJava _models(Serializable data) {
+        try {
+            Serializable responseData = (Serializable) company.getModelNames();
             return new ResponseJava(OK, responseData);
         } catch (Exception e) {
             return wrongRequest(e.getMessage());
@@ -122,79 +244,30 @@ public class RentCompanyProtocol implements ProtocolJava {
         }
     }
 
-    private ResponseJava _models(Serializable data) {
-    }
-
-    private ResponseJava _model_cars(Serializable data) {
-    }
-
-    private ResponseJava _model_remove(Serializable data) {
-    }
-
-    private ResponseJava _model(Serializable data) {
+    private ResponseJava _models_profitable(Serializable data) {
         try {
-            Serializable responseData = company.getModel((String) data);
+            StatisticsData statData = (StatisticsData) data;
+            Serializable responseData = (Serializable) company.getMostProfitableCarModels(
+                    statData.getFromDate(),
+                    statData.getToDate()
+            );
             return new ResponseJava(OK, responseData);
         } catch (Exception e) {
             return wrongRequest(e.getMessage());
         }
     }
 
-    private ResponseJava _model_add(Serializable data) {
-    }
-
-    private ResponseJava _drivers_active(Serializable data) {
+    // ===== RECORD =====
+    private ResponseJava _records(Serializable data) {
         try {
-            Serializable responseData = (Serializable) company.getMostActiveDrivers();
+            StatisticsData statData = (StatisticsData) data;
+            Serializable responseData = (Serializable) company.getRentRecordsAtDate(
+                    statData.getFromDate(),
+                    statData.getToDate()
+            );
             return new ResponseJava(OK, responseData);
         } catch (Exception e) {
             return wrongRequest(e.getMessage());
         }
-    }
-
-    private ResponseJava _drivers_car(Serializable data) {
-        try {
-            Serializable responseData = (Serializable) company.getDriversByCar((String) data);
-            return new ResponseJava(OK, responseData);
-        } catch (Exception e) {
-            return wrongRequest(e.getMessage());
-        }
-    }
-
-    private ResponseJava _driver_cars(Serializable data) {
-    }
-
-    private ResponseJava _driver(Serializable data) {
-    }
-
-    private ResponseJava _driver_add(Serializable data) {
-    }
-
-    private ResponseJava _car_return(Serializable data) {
-        try {
-            ReturnCarData returnCarData = (ReturnCarData) data;
-            Serializable responseData = company.returnCar(
-                    returnCarData.getRegNumber(),
-                    returnCarData.getLicenceId(),
-                    returnCarData.getReturnDate(),
-                    returnCarData.getDamage(),
-                    returnCarData.getTankPercent()
-                    );
-            return new ResponseJava(OK, responseData);
-        } catch (Exception e) {
-            return wrongRequest(e.getMessage());
-        }
-    }
-
-    private ResponseJava _car_remove(Serializable data) {
-    }
-
-    private ResponseJava _car_rent(Serializable data) {
-    }
-
-    private ResponseJava _car(Serializable data) {
-    }
-
-    private ResponseJava _car_add(Serializable data) {
     }
 }
