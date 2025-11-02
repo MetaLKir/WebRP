@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.row {
+    width: 40%;
+    margin: 0 auto;
+    border: 1px solid green;
+    display: inline-flex;
+    justify-content: center;
+    /*flex-direction: row-reverse;*/
+    align-items: start;
+    flex-wrap: wrap;
+}
+
+.item {
+    background-color: cadetblue;
+    border: 1px solid red;
+}
+
+.item:last-child {
+    align-self: flex-end;
+}
+
+.item:first-child {
+    align-self: start;
+}

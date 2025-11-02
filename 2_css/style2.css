@@ -1,0 +1,40 @@
+img{
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -100px;
+}
+.container{
+    width: 600px;
+    margin: 100px auto;
+    position: relative;
+}
+.left{
+    float: left;
+    width: 49%;
+}
+.right{
+    float: right;
+    width: 49%;
+}
+.left:before, .right:before{
+    content: "";
+    width: 120px;
+    height: 200px;
+}
+.left:before{
+    float: right;
+}
+.right:before{
+    float: left;
+}
+/*.nav li{*/
+/*    float: left;*/
+/*    list-style: none;*/
+/*    margin: 10px;*/
+/*}*/
+.nav li{
+    display: inline;
+    margin-right: 10px;
+}

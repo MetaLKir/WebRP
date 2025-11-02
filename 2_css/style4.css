@@ -1,0 +1,28 @@
+.box {
+    display: flex;
+    margin-top: 100px;
+    background-color: lightgreen;
+    flex-wrap: wrap;
+}
+
+.box div {
+    background-color: lightblue;
+    border: 1px solid darkgreen;
+    height: 100px;
+    width: 100px;
+}
+
+.box1 {
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+.box2 {
+    flex-grow: 2;
+    flex-shrink: 1;
+}
+
+.box3 {
+    flex-grow: 3;
+    flex-shrink: 2;
+}
