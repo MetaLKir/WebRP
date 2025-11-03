@@ -1,0 +1,30 @@
+.card{
+    border: 1px solid black;
+    border-radius: .5rem;
+    padding: 1.25rem;
+    background-color: #ffffff;
+    max-width: 420px;
+}
+.card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.card p{
+    margin: 0 0 1rem;
+    color: darkgrey;
+}
+.btn{
+    background-color: dimgray;
+    padding: .5rem 1rem;
+    border-radius: .3rem;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+}
+.btn:hover{
+    filter: brightness(1.5);
+}
