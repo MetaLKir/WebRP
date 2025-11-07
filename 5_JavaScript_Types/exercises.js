@@ -16,6 +16,7 @@ function consoleSeparator(){
 function startOfDay(date) {
     let newDate = new Date(date);
     newDate.setUTCHours(0, 0, 0, 0);
+    // newDate.setHours(0, 0, 0, 0);
     return newDate;
 }
 
@@ -31,6 +32,7 @@ consoleSeparator();
  */
 function startOfMonth(date) {
     return new Date(startOfDay(date).setUTCDate(1));
+    // return new Date(startOfDay(date).setDate(1));
 }
 
 console.log("Initial date: " + date1);
@@ -107,3 +109,7 @@ console.log([[1, 2, 3], [4, 5, 6], [7, 8, 9]].reduce(function (accumulator, item
     accumulator.unshift(...item);
     return accumulator;
 }).sort((a, b) => a - b));
+
+console.log([[1, 2, 3], [4, 5, 6], [7, 8, 9]].reduce(function (accumulator, item) {
+    return accumulator.concat(...item);
+}));
