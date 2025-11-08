@@ -59,7 +59,7 @@ class Library {
     }
 
     generateBook() {
-        let isbn = this.randomInRange(1_000_000_000, 9_999_999_999_999);
+        let isbn = this.randomInRange(1_000_000_000_000, 9_999_999_999_999);
         let title = "Title " + this.randomInRange(1, 20);
         let author = "Author " + this.randomInRange(1, 20);
         let year = this.randomInRange(1000, 2025);
