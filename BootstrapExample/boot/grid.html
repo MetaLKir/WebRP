@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Grid – Pure Bootstrap</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link rel="stylesheet" href="style_boot.css">
+</head>
+<body>
+<header class="bg-light border-bottom">
+  <div class="container py-3 d-flex justify-content-between align-items-center">
+    <a class="text-decoration-none fs-4 fw-bold text-dark" href="../index.html">MySite</a>
+    <nav class="d-none d-md-flex gap-3">
+      <a class="nav-link active" aria-current="page" href="grid.html">Grid</a>
+      <a class="header-link" href="cards.html">Cards</a>
+      <a class="header-link" href="table.html">Table</a>
+      <a class="header-link" href="forms.html">Forms</a>
+      <a class="header-link" href="more.html">More</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <h1 class="h3 section-title">Responsive Grid</h1>
+    <div class="row g-3">
+      <div class="col-md-12 col-lg-6 col-xl-3"><div class="p-4 border rounded-3">Col 1</div></div>
+      <div class="col-md-12 col-lg-6 col-xl-3"><div class="p-4 border rounded-3">Col 2</div></div>
+      <div class="col-md-12 col-lg-6 col-xl-3"><div class="p-4 border rounded-3">Col 3</div></div>
+      <div class="col-md-12 col-lg-6 col-xl-3"><div class="p-4 border rounded-3">Col 4</div></div>
+    </div>
+
+    <hr class="my-4">
+
+    <h2 class="h5 mb-3">Auto-layout columns</h2>
+    <div class="row g-3">
+      <div class="col"><div class="p-3 border rounded-3 text-center">1</div></div>
+      <div class="col"><div class="p-3 border rounded-3 text-center">2</div></div>
+      <div class="col"><div class="p-3 border rounded-3 text-center">3</div></div>
+      <div class="col"><div class="p-3 border rounded-3 text-center">4</div></div>
+    </div>
+
+    <hr class="my-4">
+
+    <h2 class="h5 mb-3">Mixed widths</h2>
+    <div class="row g-3">
+      <div class="col-8 col-lg-9"><div class="p-3 border rounded-3 text-center">.col-8 .col-lg-9</div></div>
+      <div class="col-4 col-lg-3"><div class="p-3 border rounded-3 text-center">.col-4 .col-lg-3</div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="border-top">
+  <div class="container py-4 text-center text-muted small">
+    © 2025 MySite. Pure Bootstrap, no JS.
+  </div>
+</footer>
+</body>
+</html>

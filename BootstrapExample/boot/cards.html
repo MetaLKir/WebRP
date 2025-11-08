@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Cards – Pure Bootstrap</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link rel="stylesheet" href="style_boot.css">
+</head>
+<body>
+<header class="bg-light border-bottom">
+  <div class="container py-3 d-flex justify-content-between align-items-center">
+    <a class="text-decoration-none fs-4 fw-bold text-dark" href="../index.html">MySite</a>
+    <nav class="d-none d-md-flex gap-3">
+      <a class="header-link" href="grid.html">Grid</a>
+      <a class="nav-link active" aria-current="page" href="cards.html">Cards</a>
+      <a class="header-link" href="table.html">Table</a>
+      <a class="header-link" href="forms.html">Forms</a>
+      <a class="header-link" href="more.html">More</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section bg-light">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1 class="h3 m-0">Cards</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item"><a href="../index.html" class="text-decoration-none">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Cards</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-12 col-lg-6 col-xl-3">
+        <div class="card h-100">
+          <img src="https://picsum.photos/600/400?random=10" class="card-img-top" alt="..." loading="lazy">
+          <div class="card-body">
+            <h5 class="card-title">Image Card</h5>
+            <p class="card-text">Simple image card without any JS.</p>
+            <a href="#" class="btn btn-primary btn-sm">Button</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-6 col-xl-3">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Borderless</h5>
+            <p class="card-text">No border, subtle shadow.</p>
+            <span class="badge text-bg-success">New</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-header">Header</div>
+          <div class="card-body">
+            <h5 class="card-title">With header</h5>
+            <p class="card-text">Header + body + footer.</p>
+            <a href="#" class="btn btn-outline-secondary btn-sm">Action</a>
+          </div>
+          <div class="card-footer small text-muted">Updated today</div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <figure class="mb-0">
+              <blockquote class="blockquote">
+                <p>Plain CSS components are enough for many pages.</p>
+              </blockquote>
+              <figcaption class="blockquote-footer mb-0">
+                Bootstrap Docs
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="border-top">
+  <div class="container py-4 text-center text-muted small">
+    © 2025 MySite. Pure Bootstrap, no JS.
+  </div>
+</footer>
+</body>
+</html>

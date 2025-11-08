@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>More – Pure Bootstrap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="style_boot.css">
+</head>
+<body>
+<header class="bg-light border-bottom">
+    <div class="container py-3 d-flex justify-content-between align-items-center">
+        <a class="text-decoration-none fs-4 fw-bold text-dark" href="../index.html">MySite</a>
+        <nav class="d-none d-md-flex gap-3">
+            <a class="header-link" href="grid.html">Grid</a>
+            <a class="header-link" href="cards.html">Cards</a>
+            <a class="header-link" href="table.html">Table</a>
+            <a class="header-link" href="forms.html">Forms</a>
+            <a class="header-link active" href="more.html">More</a>
+        </nav>
+    </div>
+</header>
+
+<section class="section">
+    <div class="container">
+        <h1 class="h3 mb-4">More Components (no JS)</h1>
+
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <h2 class="h6">List group</h2>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Cras justo odio
+                        <span class="badge text-bg-primary rounded-pill">14</span>
+                    </li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4">
+                <h2 class="h6">Nav pills (static)</h2>
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><span class="nav-link active">Home</span></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+                <div class="border rounded-3 p-3 mt-3">
+                    Put any static content here. Tabs/accordion/offcanvas/carousel/dropdowns are JS-driven — we skip them.
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <h2 class="h6">Progress & Spinners</h2>
+                <div class="progress mb-2" role="progressbar" aria-label="Progress" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: 45%">45%</div>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="spinner-border" role="status" aria-hidden="true"></div>
+                    <div class="spinner-grow" role="status" aria-hidden="true"></div>
+                    <small class="text-muted">Pure CSS spinners.</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+            <div class="col-lg-6">
+                <figure class="figure">
+                    <img src="https://picsum.photos/800/400?random=22" class="figure-img img-fluid rounded" alt="...">
+                    <figcaption class="figure-caption">Responsive image with caption.</figcaption>
+                </figure>
+            </div>
+            <div class="col-lg-6">
+          <pre class="p-3 bg-light border rounded-3 mb-2"><code>// Code block example
+.btn-primary { /* your overrides here */ }</code></pre>
+                <p class="mb-0">
+                    <span class="badge text-bg-dark">Badge</span>
+                    <span class="badge text-bg-info">Info</span>
+                    <span class="badge text-bg-secondary">Secondary</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="border-top">
+    <div class="container py-4 text-center text-muted small">
+        © 2025 MySite. Pure Bootstrap, no JS.
+    </div>
+</footer>
+</body>
+</html>
