@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+    <style>
+        .wrapper {
+            width: 200px;
+            height: 200px;
+            background-color: blanchedalmond;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+        }
+        li[data-mark='5']{
+            background-color: aquamarine;
+        }
+        li[data-mark='4']{
+            background-color: lavender;
+        }
+    </style>
+</head>
+<body>
+<label>
+    <input type="text" class="myInput">
+</label>
+<button class="btn" onclick=console.log("clicky-click")>Click Me</button>
+<button class="btn" onclick=show()>Click Me 2</button>
+<button class="btn" id="js">Click Me 3</button>
+<a href="https://www.google.com">Google</a>
+<button class="btn1">Butty</button>
+<div class="wrapper">
+    <div class="box">
+        <button class="btn">Click Me</button>
+    </div>
+    <input type="text" class="myInput">
+</div>
+
+<ol>
+    <li data-mark="5">One</li>
+    <li data-mark="4">Two</li>
+    <li data-mark="3">Three</li>
+    <li data-mark="2">Four</li>
+    <li data-mark="1">Five</li>
+</ol>
+
+<script src="event.js" defer></script>
+</body>
+</html>
+
