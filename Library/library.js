@@ -51,40 +51,39 @@ class Library {
             this.#books.push(book);
     }
 
-    generateRandomBooks(amount) {
-        for (let i = 0; this.#books.length < amount; i++) {
-            let book = this.generateBook();
+    generateRandomBooks(amount, yearFrom, yearTo) {
+        for (let i = 0; i < amount; i++) {
+            let book = this.generateBook(yearFrom, yearTo);
             this.addBook(book);
         }
     }
 
-    generateBook() {
+    generateBook(yearFrom, yearTo) {
         let isbn = this.randomInRange(1_000_000_000_000, 9_999_999_999_999);
         let title = "Title " + this.randomInRange(1, 20);
         let author = "Author " + this.randomInRange(1, 20);
-        let year = this.randomInRange(1000, 2025);
+        let year = this.randomInRange(yearFrom, yearTo);
         return new Book(isbn, title, author, year);
     }
 
     randomInRange(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+        return Math.floor(Math.random() * (Number(max) - Number(min) + 1)) + Number(min);
     }
 
     findByAuthor(author, isPreciseSearch = true) {
-        author.toLocaleLowerCase();
-        if(isPreciseSearch){
+        author.trim().toLocaleLowerCase();
+        if (isPreciseSearch) {
             return this.#books.filter(
                 e => e.author.toLocaleLowerCase() === author);
         } else {
             return this.#books.filter(
                 e => e.author.toLocaleLowerCase().includes(author));
         }
-
     }
 
     findByTitle(title, isPreciseSearch = true) {
-        title.toLocaleLowerCase();
-        if(isPreciseSearch){
+        title.trim().toLocaleLowerCase();
+        if (isPreciseSearch) {
             return this.#books.filter(
                 e => e.title.toLocaleLowerCase() === title);
         } else {
@@ -97,26 +96,84 @@ class Library {
     getAllBooks() {
         return this.#books;
     }
+
+    size() {
+        return this.#books.length;
+    }
+
+    removeAllBooks(){
+        this.#books = [];
+    }
 }
 
-//===========================================
+//======================================================================
 let library = new Library();
-library.generateRandomBooks(5);
-console.log(library.getAllBooks().map(e => e.toString()));
+
+//========== get elements from html ==========
+const inputBookAmount = document.querySelector('#bookAmount');
+const inputYearMin = document.querySelector('#yearMin');
+const inputYearMax = document.querySelector('#yearMax');
+const inputBookFilterText = document.querySelector('#bookFilterText');
+const buttonGenerateBooks = document.querySelector('#generateBooks');
+const buttonClearLibrary = document.querySelector('#clearLibrary');
+const buttonSearchByAuthor = document.querySelector('#searchByAuthor');
+const buttonSearchByTitle = document.querySelector('#searchByTitle');
+const isPreciseSearch = document.querySelector('#preciseSearch');
+const generatedBooksList = document.querySelector('#generatedBooksList');
+const searchedBooksList = document.querySelector('#searchedBooksList');
+
+//========== bind events to buttons ==========
+buttonSearchByAuthor.onclick = () => {findBook("author")};
+buttonSearchByTitle.onclick = () => {findBook("title")};
+buttonClearLibrary.onclick = () => {
+    library.removeAllBooks();
+    clearBooksList(generatedBooksList);
+    addEmptyElementList(generatedBooksList);
+};
+buttonGenerateBooks.onclick = () => {
+    library.generateRandomBooks(inputBookAmount.value, inputYearMin.value, inputYearMax.value);
+    fillBooksList(library.getAllBooks(), generatedBooksList);
+};
+
+//========== main stuff ==========
+function fillBooksList(books, listToFill) {
+    clearBooksList(listToFill);
+    for(let i in books) {
+        const li = document.createElement('li');
+        li.classList.add("list-group-item");
+        li.textContent = books[i];
+        listToFill.appendChild(li);
+    }
+}
+
+function clearBooksList(listToClear) {
+    listToClear.innerHTML = '';
+}
 
 function findBook(findType) {
-    let key = prompt(`Enter ${findType} name: `).trim();
-    let value;
-    let preciseSearch = document.getElementById("preciseSearch");
+    clearBooksList(searchedBooksList);
+    let key = inputBookFilterText.value.trim();
+    let result;
     switch (findType) {
         case "title":
-            value = library.findByTitle(key, preciseSearch.checked);
+            result = library.findByTitle(key, isPreciseSearch.checked);
             break;
         case "author":
-            value = library.findByAuthor(key, preciseSearch.checked);
+            result = library.findByAuthor(key, isPreciseSearch.checked);
             break;
         default:
             alert("Unknown search type");
     }
-    alert("search result:\n" + value.join("\n"));
+    result.length > 0 ?
+        fillBooksList(result, searchedBooksList) :
+        addEmptyElementList(searchedBooksList);
+
+}
+
+function addEmptyElementList(listAddTo) {
+    const li = document.createElement('li');
+    li.classList.add("list-group-item");
+    li.classList.add("list-group-item-warning");
+    li.textContent = "List is empty";
+    listAddTo.appendChild(li);
 }

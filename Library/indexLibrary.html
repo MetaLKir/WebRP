@@ -2,17 +2,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>Library</title>
 </head>
-<body>
+<body class="bg-black bg-gradient text-white text-center">
+
+<!--BOOK GENERATION-->
+<section id="bookGeneration" class="py-5">
+    <h2 class="pb-3">Book generation </h2>
+    <div class="d-flex justify-content-center">
+        <div class="m-1 col-2">
+            <label for="bookAmount" class="form-label">Amount</label>
+            <input id="bookAmount" type="number" class="form-control" placeholder="amount of books to generate"
+                   value="100"
+                   min="1">
+        </div>
+        <div class="m-1 col-2">
+            <label for="yearMin" class="form-label">From year</label>
+            <input id="yearMin" type="number" class="form-control" placeholder="year min border" value="1000">
+        </div>
+        <div class="m-1 col-2">
+            <label for="yearMax" class="form-label">To year</label>
+            <input id="yearMax" type="number" class="form-control" placeholder="year max border" value="2025">
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button id="generateBooks" class="btn btn-success m-1">Generate books</button>
+        <button id="clearLibrary" class="btn btn-danger m-1">Clear library</button>
+    </div>
+</section>
+
+<!--GENERATION RESULT-->
+<section id="generationResult" class="py-5">
+    <h2 class="pb-3">List of generated books</h2>
+    <div class="border overflow-auto mx-auto text-start col-6" style="max-height: 150px">
+        <ol class="list-group list-group-numbered" id="generatedBooksList">
+            <li class="list-group-item list-group-item-warning">List is empty</li>
+        </ol>
+    </div>
+</section>
+
+<!--BOOK SEARCH-->
+<section id="bookFind" class="py-5">
+    <div>
+        <h2 class="pb-3">Choose how to find a book</h2>
+        <div class="input-group m-3  w-25 mx-auto">
+            <span class="input-group-text">Search filter: </span>
+            <input id="bookFilterText" class="form-control col-auto" placeholder="enter name of the book or author">
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button id="searchByTitle" class="btn btn-primary">By title</button>
+            <button id="searchByAuthor" class="btn btn-warning">By author</button>
+        </div>
+        <label>
+            Precise search:
+            <input id="preciseSearch" type="checkbox" class="form-check-input">
+        </label>
+    </div>
+</section>
+
+<!--SEARCH RESULT-->
+<section id="searchResult" class="py-5">
+    <h2 class="pb-3">List of filtered books</h2>
+    <div class="border overflow-auto mx-auto text-start col-6" style="max-height: 150px">
+        <ol class="list-group list-group-numbered" id="searchedBooksList">
+            <li class="list-group-item list-group-item-warning">List is empty</li>
+        </ol>
+    </div>
+</section>
+
+<!-- footer -->
+<footer class="p-4 bg-dark text-white">
+    <h5 class="text-warning">made by Kir</h5>
+</footer>
+
 <script src="library.js" defer></script>
-<p>Choose how to find a book</p>
-<button onclick=findBook("title")>By title</button>
-<button onclick=findBook("author")>By author</button>
-<br>
-<label>
-    <input type="checkbox" id="preciseSearch">
-    Precise search
-</label>
 </body>
 </html>
