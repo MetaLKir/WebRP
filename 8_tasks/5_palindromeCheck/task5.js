@@ -5,6 +5,7 @@ let checkBtn = document.getElementById("check");
 checkBtn.onclick = () => isPalindrome(inString.value);
 
 function isPalindrome(str) {
+    str = str.trim();
     for (let i = 0, j = str.length - 1; i < j; i++, j--) {
         if (str[i] !== str[j]) {
             showResult(false);
