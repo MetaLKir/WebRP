@@ -117,7 +117,7 @@ let group7 = {
         const show = function (name) {
             console.log(`${this.title}: ${name}`);
         }
-        this.students.forEach(name => show.call(this, name));
+        this.students.forEach(name => show.call(group7, name));
     }
 }
 group7.showList();
