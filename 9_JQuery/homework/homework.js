@@ -124,6 +124,38 @@ group7.showList();
 
 
 //============================================================================
+consoleSeparator("old way: var with context")
+// SOLUTION 8: add var with context inside .showList
+let group8 = {
+    title: "Karmiel 2025-2026",
+    students: ['Kir', 'Masha', 'Zhenya'],
+    showList: function () {
+        const context = this;
+        const show = function (name) {
+            console.log(`${context.title}: ${name}`);
+        }
+        this.students.forEach(show);
+    }
+}
+group8.showList();
+
+//============================================================================
+consoleSeparator("pass context into .showList")
+// SOLUTION 9: pass context into .showList
+let group9 = {
+    title: "Karmiel 2025-2026",
+    students: ['Kir', 'Masha', 'Zhenya'],
+    showList: function (t = this.title) {
+        const show = function (name) {
+            console.log(`${t}: ${name}`);
+        }
+        this.students.forEach(show);
+    }
+}
+group9.showList();
+
+
+//============================================================================
 // my little utility
 function consoleSeparator(text, separatorSymbol = '=') {
     console.log(separatorSymbol.repeat(10) + " " + text + " " + separatorSymbol.repeat(10));
