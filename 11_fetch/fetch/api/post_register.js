@@ -41,3 +41,26 @@ registerBtn.onclick = async () => {
 }
 // fetch => then => catch // old version
 // try {await fetch} catch // new version
+
+/* === then ====
+fetch(url).then(res=>{
+    if(!res.ok) throw new Error(res.status);
+    return res.json()}
+    .then(data=>consol.log(data))
+    .catch(err=>console.log(err))
+
+ // send request, parse data, do something with it, catch errors
+
+ ===============================================
+ async function load() {
+     try {
+     const res = await fetch(url);      // send request
+     if(!res.ok) throw new Error(res.status);
+     const data = await res.json();     // parse data
+     console.log(data)                  // do something with it
+     } catch(err) {                     // catch errors
+        console.log(err)
+     }
+}
+// we can put promises in constants
+ */
