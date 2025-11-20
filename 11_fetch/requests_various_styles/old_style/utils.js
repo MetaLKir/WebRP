@@ -4,5 +4,5 @@ function printOut(title, extra, body) {
     out.textContent = `[${time}]\n${title}\n` +
         (extra ? extra + '\n' : '') +
         '====================================\n' +
-        (body ? (typeof body === 'string' ? body : JSON.stringify(body)) : '');
+        (body ? (typeof body === 'string' ? body : JSON.stringify(body, null, 2)) : '') + '\n';
 }
