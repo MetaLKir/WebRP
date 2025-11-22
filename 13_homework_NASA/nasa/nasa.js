@@ -1,4 +1,6 @@
 const BASE_URL = "https://api.nasa.gov/planetary/apod"
+const MAX_IMG_AMOUNT = 50;
+const MIN_IMG_AMOUNT = 1;
 
 // ===== input fields =====
 const dateInput = document.querySelector("#dateInput");
@@ -22,9 +24,12 @@ imgByDateBtn.onclick = () => {
     }
 }
 imgByDateRangeBtn.onclick = () => {
-    if (dateFromInput.value === "") {
+    if (dateFromInput.value === "" || dateToInput.value === "") {
         onScreenWarning();
-    } else {
+    } else if (dateFromInput.value > dateToInput.value) {
+        onScreenWarning("Incorrect range: start date is greater than end date");
+    }
+    else {
         fetchPicture({
             start_date: dateFromInput.value,
             end_date: dateToInput.value,
@@ -41,6 +46,15 @@ imgByAmountBtn.onclick = () => {
         fetchPicture({count: amountInput.value});
     }
 }
+// img amount range limit
+amountInput.oninput = () => {
+    if (Number(amountInput.value) > MAX_IMG_AMOUNT) {
+        amountInput.value = MAX_IMG_AMOUNT;
+    } else if (Number(amountInput.value) < MIN_IMG_AMOUNT){
+        amountInput.value = MIN_IMG_AMOUNT;
+    }}
+amountInput.min = MIN_IMG_AMOUNT;
+amountInput.max = MAX_IMG_AMOUNT;
 
 // ===== logic =====
 function displayResult(data, container) {
@@ -118,7 +132,7 @@ async function fetchPicture(params = {}) {
             data.forEach(item => {displayResult(item, resultContainer)});
         }
     } catch (e) {
-        console.log(`Error: ${e.message}`);
+        console.log(`Error: ${e.status}`);
         onScreenWarning(`Error: ${e.status}`);
     }
 }
