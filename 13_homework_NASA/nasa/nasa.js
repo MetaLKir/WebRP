@@ -1,5 +1,5 @@
 const BASE_URL = "https://api.nasa.gov/planetary/apod"
-const API_KEY = "t2weUkUOT14AAu5op4nJjgDg71gfzkxCQb7M16VD";
+const API_KEY = ""; // put here your API_KEY
 const MAX_IMG_AMOUNT = 50;
 const MIN_IMG_AMOUNT = 1;
 const MIN_DATE = new Date(1995, 5, 16);
