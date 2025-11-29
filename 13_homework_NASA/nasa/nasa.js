@@ -1,10 +1,12 @@
 const BASE_URL = "https://api.nasa.gov/planetary/apod"
-const API_KEY = ""; // put here your API_KEY
 const MAX_IMG_AMOUNT = 50;
 const MIN_IMG_AMOUNT = 1;
 const MIN_DATE = new Date(1995, 5, 16);
 
+let apiKey = "";
+
 // ===== input fields =====
+const inputSection = document.querySelector("#inputs");
 const dateInput = document.querySelector("#dateInput");
 const dateFromInput = document.querySelector("#dateFromInput");
 const dateToInput = document.querySelector("#dateToInput");
@@ -14,6 +16,7 @@ const apiKeyInput = document.querySelector("#apiKeyInput");
 const imgByDateBtn = document.querySelector("#imgByDateBtn");
 const imgByDateRangeBtn = document.querySelector("#imgByDateRangeBtn");
 const imgByAmountBtn = document.querySelector("#imgByAmountBtn");
+const apiKeyBtn = document.querySelector("#apiKeyBtn");
 // ===== result =====
 const resultContainer = document.querySelector('#resultContainer');
 
@@ -46,6 +49,14 @@ imgByAmountBtn.onclick = () => {
     } else {
         fetchPicture({count: amountInput.value});
     }
+}
+
+apiKeyBtn.onclick = () => {
+    apiKey = apiKeyInput.value;
+    let dateNow = new Date();
+    // dateNow.setDate(dateNow.getDate() + 3); // to test if no image for selected date; try get img from future
+    fetchPictureDefault(dateNow);
+    toggleInputFields(true);
 }
 
 // img amount range limit
@@ -196,10 +207,15 @@ function limitDataInput(inputField) {
     }
 }
 
+function toggleInputFields(isActive){
+    if(isActive){
+        inputSection.classList.remove("inactive");
+    } else {
+        inputSection.classList.add("inactive");
+    }
+}
+
 //============================//
 //========== script ==========//
 //============================//
-apiKeyInput.value = API_KEY;
-let dateNow = new Date();
-dateNow.setDate(dateNow.getDate() + 3);
-fetchPictureDefault(dateNow);
+toggleInputFields(false);
