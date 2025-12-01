@@ -4,7 +4,7 @@ import "./styles.css"
 
 
 const rootElement: HTMLElement | null = document.querySelector("#root");
-if (!rootElement) {
+if (!rootElement) { // check for null
     throw new Error("Could not find root element");
 }
 const root = createRoot(rootElement);
