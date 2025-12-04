@@ -1,4 +1,5 @@
-import Form from "./Form.tsx";
+
+import FormControl from "./FormControl.tsx";
 import Weather from "./Weather.tsx";
 import {Component} from "react";
 import type {DataProps, DataState} from "../data";
@@ -14,6 +15,7 @@ class Data extends Component<DataProps, DataState> {
                 country: null,
                 pressure: null,
                 sunset: null,
+                error: "Please, inter city name",
             }
         }
     }
@@ -21,6 +23,9 @@ class Data extends Component<DataProps, DataState> {
     getWeather = async (city_: string | null) => {
         try {
             const response = await fetch(`${BASE_URL}?q=${city_}&appid=${API_KEY}&units=metric`);
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
             const data = await response.json();
             this.setState({
                 weatherInfo: {
@@ -29,6 +34,7 @@ class Data extends Component<DataProps, DataState> {
                     temp: data.main.temp,
                     pressure: data.main.pressure,
                     sunset: data.sys.sunset,
+                    error: null
                 }
             })
         } catch (e) {
@@ -42,7 +48,8 @@ class Data extends Component<DataProps, DataState> {
 
     render() {
         return <div>
-            <Form getWeather={this.getWeather}/>
+            {/*<Form getWeather={this.getWeather}/>*/}
+            <FormControl getWeather={this.getWeather}/>
             <Weather weather={this.state.weatherInfo}/>
         </div>
     }

@@ -1,6 +1,10 @@
 import type {WeatherProps} from "../data";
 
 const Weather = ({weather}: WeatherProps) => {
+    if (!weather.city) {
+        return <p>{weather.error ?? "Please enter city name"}</p>
+    }
+
     return (
         <div>
             <p>Location: {weather.country}, {weather.city}</p>
