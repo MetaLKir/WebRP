@@ -22,9 +22,40 @@ class App extends Component<AppProps, AppState> {
         }
     }
 
-    private changeAvatar: (url: string) => void;
-    private changeName: (name: string) => void;
-    private changeStats: (StatsType: ("followers" | "following"), delta: number) => void;
+    private changeAvatar = (url: string | null) => {
+        this.setState(
+            (prevState: AppState) => {
+                const newUser = {...prevState.user};
+                if (url && url.trim() !== "") {
+                    newUser.avatar = url;
+                }
+                return {user: newUser};
+            }
+        );
+    };
+
+    private changeName = (name: string | null) => {
+        this.setState(
+            (prevState: AppState) => {
+                const newUser = {...prevState.user};
+                if (name && name.trim() !== "") {
+                    newUser.name = name;
+                }
+                return {user: newUser};
+            }
+        );
+    };
+
+    private changeStats = (type: ("followers" | "following"), delta: number) => {
+        this.setState(
+            (prev: AppState) => {
+                const newStats = {...prev.stats};
+                const current = newStats[type] + delta;
+                newStats[type] = current < 0 ? 0 : current;
+                return {stats: newStats};
+            }
+        )
+    };
 
     render() {
         const contextValue: TwitterContextValue = {

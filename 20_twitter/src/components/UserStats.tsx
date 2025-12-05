@@ -8,7 +8,7 @@ const UserStats = () => {
         <TwitterContext.Consumer>
             {(value: TwitterContextValue | null) => {
                 if (!value) return <p>No context</p>
-                const {user, stats} = value;
+                const {user, stats, changeStats} = value;
 
                 return (
                     <div className="user-stats">
@@ -17,8 +17,18 @@ const UserStats = () => {
                             {user.name}
                         </div>
                         <div className="stats">
-                            <div>Followers: {stats.followers}</div>
-                            <div>Following: {stats.following}</div>
+                            <div onClick={()=> changeStats("followers", 1)}
+                                 onContextMenu={(e)=> {
+                                     e.preventDefault();
+                                     changeStats("followers", -1)}}>
+                                Followers: {stats.followers}
+                            </div>
+                            <div onClick={()=> changeStats("following", 1)}
+                                 onContextMenu={(e)=> {
+                                     e.preventDefault();
+                                     changeStats("following", -1)}}>
+                                Following: {stats.following}
+                            </div>
                         </div>
                     </div>
                 );
