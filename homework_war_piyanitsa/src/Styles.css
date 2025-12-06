@@ -1,0 +1,40 @@
+.card{
+    max-height: 250px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.table{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.combat-controller{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.player{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.start{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.end{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
