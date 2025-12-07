@@ -1,4 +1,4 @@
-import {type FC, useState} from "react";
+import {type FC, useEffect, useState} from "react";
 import {type CardProps, Ranks} from "../../types.ts";
 import {createDeck, shuffleDeck} from "../../data.ts";
 import {Player} from "../Player.tsx";
@@ -26,12 +26,12 @@ export const CombatStage: FC<CombatStageProps> = (props) => {
     const [player2Pickups, setPlayer2Pickups] = useState(0);
 
     const playRound = () => {
-        const newPlayerDeck = [...player1Deck];
-        const newComputerDeck = [...player2Deck];
+        const newPlayer1Deck = [...player1Deck];
+        const newPlayer2Deck = [...player2Deck];
         const newCombatPool = [...roundPool];
 
-        const firstPlayerCard = newPlayerDeck.shift();
-        const secondPlayerCard = newComputerDeck.shift();
+        const firstPlayerCard = newPlayer1Deck.shift();
+        const secondPlayerCard = newPlayer2Deck.shift();
         if (!firstPlayerCard || !secondPlayerCard) return;
 
         let twoVsAce = false;
@@ -42,26 +42,34 @@ export const CombatStage: FC<CombatStageProps> = (props) => {
         }
 
         if (firstPlayerCard.value > secondPlayerCard.value || twoVsAce) {
-            newPlayerDeck.push(firstPlayerCard, secondPlayerCard, ...newCombatPool);
+            newPlayer1Deck.push(secondPlayerCard, firstPlayerCard, ...newCombatPool);
             setPlayer1Pickups(e => ++e);
             setRoundPool([]);
         } else if (secondPlayerCard.value > firstPlayerCard.value || aceVsTwo) {
-            newComputerDeck.push(secondPlayerCard, firstPlayerCard, ...newCombatPool);
+            newPlayer2Deck.push(firstPlayerCard, secondPlayerCard, ...newCombatPool);
             setPlayer2Pickups(e => ++e);
             setRoundPool([]);
         } else {
             newCombatPool.push(firstPlayerCard, secondPlayerCard);
             setRoundPool(newCombatPool);
         }
-        setPlayer1Deck(newPlayerDeck);
-        setPlayer2Deck(newComputerDeck);
+        setPlayer1Deck(newPlayer1Deck);
+        setPlayer2Deck(newPlayer2Deck);
     };
 
-    if (player1Deck.length === 0) {
-        endCombat(player2Name, player2Pickups, player1Pickups);
-    } else if (player2Deck.length === 0) {
-        endCombat(player1Name, player1Pickups, player2Pickups);
-    }
+    useEffect(() => {
+        if (player1Deck.length === 0) {
+            endCombat(player2Name, player2Pickups, player1Pickups);
+        } else if (player2Deck.length === 0) {
+            endCombat(player1Name, player1Pickups, player2Pickups);
+        }
+    }, [endCombat, player1Deck, player1Name, player1Pickups, player2Deck, player2Name, player2Pickups]);
+    
+    // if (player1Deck.length === 0) {
+    //     endCombat(player2Name, player2Pickups, player1Pickups);
+    // } else if (player2Deck.length === 0) {
+    //     endCombat(player1Name, player1Pickups, player2Pickups);
+    // }
 
     return (
         <div>
