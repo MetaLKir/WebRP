@@ -1,0 +1,83 @@
+/* ===== Базовые стили страницы ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  sans-serif;
+  background: #f5f8fa;
+  color: #0f1419;
+}
+
+/* ===== Каркас приложения ===== */
+.app {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(15, 20, 25, 0.12);
+  overflow: hidden;
+}
+
+/* ===== Верхняя панель (Nav) ===== */
+.nav {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e1e8ed;
+}
+
+/* маленький аватар в шапке */
+.user-avatar.small {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ===== Основная часть (Body) ===== */
+.body {
+  display: flex;
+  min-height: 260px;
+}
+
+/* ===== Левая колонка (SideBar) ===== */
+.sidebar {
+  width: 260px;
+  padding: 16px;
+  border-right: 1px solid #e1e8ed;
+  text-align: center;
+}
+
+/* большой аватар в сайдбаре */
+.user-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 5%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 12px;
+}
+
+/* блок с цифрами */
+.user-stats {
+  font-size: 14px;
+  color: #536471;
+}
+
+.user-stats .stats {
+  margin-top: 8px;
+}
+
+.user-stats .stats div {
+  margin: 2px 0;
+}
+
+/* ===== Центральный контент (Content) ===== */
+.content {
+  flex: 1;
+  padding: 16px 20px;
+  font-size: 16px;
+}
