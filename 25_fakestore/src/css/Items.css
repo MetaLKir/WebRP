@@ -1,0 +1,46 @@
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card-img {
+    height: 200px;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+    display: block;
+}
+
+.card-title {
+    margin: 12px 0 8px;
+}
+
+.card-price {
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.card-category {
+    font-size: 14px;
+    margin: 8px 0;
+    text-align: center;
+}
+
+.card-description {
+    font-size: 14px;
+    text-align: justify;
+    word-wrap: break-word;
+}
+
+

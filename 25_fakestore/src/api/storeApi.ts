@@ -18,5 +18,4 @@ export const login =
     const res =
         await storeApi.post<LoginResponse>("/auth/login", loginRequest);
     return res.data;
-
 }
